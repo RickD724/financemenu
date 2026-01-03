@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F&I Product Menu - Professional Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Premium Color Palette */
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --primary-light: #60A5FA;
+            --accent: #06B6D4;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            
+            /* Neutrals */
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            
+            /* Semantic */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: var(--gray-50);
+            --text-primary: var(--gray-900);
+            --text-secondary: var(--gray-600);
+            --border: var(--gray-200);
+            
+            /* Effects */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app-wrapper {
+            min-height: 100vh;
+            background: var(--gray-50);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .mode-switcher {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--gray-100);
+            padding: 0.25rem;
+            border-radius: var(--radius-md);
+        }
+
+        .mode-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Admin View */
+        .admin-header {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+        }
+
+        .admin-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Share Box */
+        .share-box {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .share-box h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .share-box p {
+            opacity: 0.9;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .share-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .share-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.875rem;
+            font-family: 'Courier New', monospace;
+            backdrop-filter: blur(10px);
+        }
+
+        .share-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .share-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .product-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .product-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .product-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-subtitle {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .product-body {
+            padding: 1.5rem;
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            min-height: 60px;
+        }
+
+        .product-price {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .price-amount {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .select-btn {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .select-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .product-card.selected .select-btn {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Admin Product Card */
+        .admin-product-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .admin-product-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .admin-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .delete-btn {
+            padding: 0.5rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1.25rem;
+            line-height: 1;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #DC2626;
+            transform: scale(1.1);
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input.icon-input {
+            width: 70px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .form-input.price-input {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-50);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+        }
+
+        /* Add Product Card */
+        .add-product-card {
+            background: var(--gray-50);
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-product-card:hover {
+            background: var(--gray-100);
+            border-color: var(--primary);
+        }
+
+        .add-icon {
+            font-size: 3rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+        }
+
+        .add-product-card:hover .add-icon {
+            color: var(--primary);
+        }
+
+        /* Customer View */
+        .hero-section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Layout Grid */
+        .customer-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Summary Panel */
+        .summary-panel {
+            position: sticky;
+            top: 100px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .summary-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .summary-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .summary-body {
+            padding: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.75rem;
+        }
+
+        .summary-item-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .summary-item-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .summary-totals {
+            border-top: 2px solid var(--border);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .total-row.grand-total {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary);
+        }
+
+        .total-row.grand-total .amount {
+            color: var(--primary);
+        }
+
+        .summary-actions {
+            padding: 1.5rem;
+            background: var(--gray-50);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-text {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-credit {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xl);
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1001;
+            animation: toastIn 0.3s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+        }
+
+        .toast-message {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .customer-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-panel {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🛡️</div>
+                    <span>F&I Product Menu</span>
+                </div>
+                <div class="mode-switcher">
+                    <button class="mode-btn active" onclick="switchMode('admin')">Admin</button>
+                    <button class="mode-btn" onclick="switchMode('customer')">Customer View</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Admin View -->
+            <div class="view active" id="adminView">
+                <div class="admin-header">
+                    <h1 class="admin-title">Product Management</h1>
+                    <p class="admin-subtitle">Configure your F&I products, pricing, and descriptions</p>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" onclick="generateLink()">
+                            🔗 Generate Customer Link
+                        </button>
+                        <button class="btn btn-secondary" onclick="saveProducts()">
+                            💾 Save Products
+                        </button>
+                        <button class="btn btn-secondary" onclick="switchMode('customer')">
+                            👁️ Preview
+                        </button>
+                    </div>
+                </div>
+
+                <div class="share-box" id="adminShareBox" style="display: none;">
+                    <h3>📤 Share with Customer</h3>
+                    <p>Copy this link and send it to your customer via email or text</p>
+                    <div class="share-input-group">
+                        <input type="text" class="share-input" id="adminShareUrl" readonly onclick="this.select()">
+                        <button class="btn btn-primary" onclick="copyLink('admin')">
+                            📋 Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="adminGrid">
+                    <!-- Admin products rendered here -->
+                </div>
+
+                <div class="add-product-card" onclick="addProduct()">
+                    <div class="add-icon">+</div>
+                    <div style="font-weight: 600; color: var(--text-secondary);">Add New Product</div>
+                </div>
+            </div>
+
+            <!-- Customer View -->
+            <div class="view" id="customerView">
+                <div class="hero-section">
+                    <h1 class="hero-title">Protect Your Investment</h1>
+                    <p class="hero-description">Select the protection and service plans that best suit your needs. Our comprehensive coverage options ensure your vehicle remains in pristine condition for years to come.</p>
+                </div>
+
+                <div class="share-box">
+                    <h3>📤 Share Your Selections</h3>
+                    <p>After selecting products, copy the link below and email it to your sales representative</p>
+                    <div class="share-input-group">
+                        <input type="text" class="share-input" id="customerShareUrl" readonly onclick="this.select()">
+                        <button class="btn btn-primary" onclick="copyLink('customer')">
+                            📋 Copy
+                        </button>
+                        <button class="btn btn-success" onclick="emailLink()">
+                            ✉️ Email
+                        </button>
+                    </div>
+                </div>
+
+                <div class="customer-layout">
+                    <div class="products-grid" id="customerGrid">
+                        <!-- Customer products rendered here -->
+                    </div>
+
+                    <div class="summary-panel">
+                        <div class="summary-header">
+                            <h3 class="summary-title">Your Selection</h3>
+                        </div>
+                        <div id="summaryContent">
+                            <div class="empty-state">
+                                <div class="empty-icon">🛡️</div>
+                                <div>Select products to see your summary</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div>F&I Product Menu © 2026</div>
+            <div class="footer-credit">Made with ❤️ by Ricardo Dias</div>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">✅</div>
+            <h3 class="modal-title" id="modalTitle">Success</h3>
+            <p class="modal-text" id="modalText">Action completed</p>
+            <button class="btn btn-primary" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message" id="toastMessage">Copied!</span>
+    </div>
+
+    <script>
+        // Default products
+        let products = [
+            {
+                id: 'multi_coverage',
+                icon: '📋',
+                title: 'Porsche Multi-Coverage',
+                subtitle: 'Porsche Financial Services',
+                description: 'Platinum Coverage: Tire & Wheel, Ding & Dent, Windshield, Key Replacement. Comprehensive protection for your vehicle.',
+                price: 5344
+            },
+            {
+                id: 'lease_end',
+                icon: '🔒',
+                title: 'Lease-End Protection',
+                subtitle: 'Porsche Protection Plan',
+                description: 'Minimize unexpected repair expenses with Vehicle Service Protection that covers mechanical repairs including parts and labor after the manufacturer warranty expires.',
+                price: 1994
+            },
+            {
+                id: 'term_coverage',
+                icon: '🛡️',
+                title: 'Term Coverage Plus',
+                subtitle: 'Porsche Financial Services',
+                description: 'The optional Porsche Protection Plan gives you peace of mind, preserving the appearance of your vehicle and allowing you to simply enjoy the drive.',
+                price: 3878
+            },
+            {
+                id: 'xpel',
+                icon: '⚡',
+                title: 'XPEL Surface Protection',
+                subtitle: 'Ultimate Paint Protection',
+                description: 'Protects your vehicle\'s good looks and resale value by providing paint and interior surface protection.',
+                price: 2495
+            },
+            {
+                id: 'surface',
+                icon: '✨',
+                title: 'Surface Protection',
+                subtitle: 'Cilajet Ultimate',
+                description: 'Aviation Grade protection from sun, weather, and abuse. Paint sealant protects surfaces from heat, oxidizing, or loss of gloss.',
+                price: 1995
+            },
+            {
+                id: 'vehicle_service',
+                icon: '🔧',
+                title: 'Vehicle Service Protection',
+                subtitle: 'Porsche Financial Services',
+                description: 'Nationwide service at authorized dealers, 24-hour roadside assistance, rental car reimbursement, and trip interruption coverage.',
+                price: 3805
+            },
+            {
+                id: 'dent',
+                icon: '☂️',
+                title: 'Dent Protection',
+                subtitle: 'Porsche Financial Services',
+                description: 'Repairs dents and dings from everyday use. Removes door dings and minor dents without harming your vehicle\'s factory finish.',
+                price: 630
+            },
+            {
+                id: 'tire_wheel',
+                icon: '⚙️',
+                title: 'Tire & Wheel Protection',
+                subtitle: 'Porsche Financial Services',
+                description: 'Premier protection keeps you on the road by repairing damaged tires and wheels from road hazards.',
+                price: 1850
+            }
+        ];
+
+        let selectedProducts = new Set();
+        let currentMode = 'admin';
+
+        // Initialize
+        function init() {
+            loadProducts();
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.get('selections')) {
+                try {
+                    const selections = JSON.parse(atob(urlParams.get('selections')));
+                    selectedProducts = new Set(selections);
+                    switchMode('customer');
+                } catch (e) {
+                    console.error('Failed to load selections:', e);
+                }
+            }
+            
+            if (urlParams.get('products')) {
+                try {
+                    products = JSON.parse(atob(urlParams.get('products')));
+                } catch (e) {
+                    console.error('Failed to load products:', e);
+                }
+            }
+            
+            renderAdmin();
+            renderCustomer();
+        }
+
+        // Load from localStorage
+        function loadProducts() {
+            const saved = localStorage.getItem('fi_products');
+            if (saved) {
+                try {
+                    products = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Failed to load saved products:', e);
+                }
+            }
+        }
+
+        // Save to localStorage
+        function saveProducts() {
+            localStorage.setItem('fi_products', JSON.stringify(products));
+            showToast('✅ Products saved successfully!');
+        }
+
+        // Switch mode
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            
+            if (mode === 'admin') {
+                document.getElementById('adminView').classList.add('active');
+                document.querySelectorAll('.mode-btn')[0].classList.add('active');
+                renderAdmin();
+            } else {
+                document.getElementById('customerView').classList.add('active');
+                document.querySelectorAll('.mode-btn')[1].classList.add('active');
+                renderCustomer();
+                updateCustomerUrl();
+            }
+        }
+
+        // Render admin
+        function renderAdmin() {
+            const grid = document.getElementById('adminGrid');
+            grid.innerHTML = products.map((p, i) => `
+                <div class="admin-product-card">
+                    <div class="admin-card-header">
+                        <h3 class="admin-card-title">${p.title}</h3>
+                        <button class="delete-btn" onclick="deleteProduct(${i})">×</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Icon (Emoji)</label>
+                        <input type="text" class="form-input icon-input" value="${p.icon}" onchange="updateProduct(${i}, 'icon', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Product Title</label>
+                        <input type="text" class="form-input" value="${p.title}" onchange="updateProduct(${i}, 'title', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subtitle</label>
+                        <input type="text" class="form-input" value="${p.subtitle}" onchange="updateProduct(${i}, 'subtitle', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" onchange="updateProduct(${i}, 'description', this.value)">${p.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price ($)</label>
+                        <input type="number" class="form-input price-input" value="${p.price}" onchange="updateProduct(${i}, 'price', parseFloat(this.value))">
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render customer
+        function renderCustomer() {
+            const grid = document.getElementById('customerGrid');
+            grid.innerHTML = products.map(p => {
+                const selected = selectedProducts.has(p.id);
+                return `
+                    <div class="product-card ${selected ? 'selected' : ''}" id="card-${p.id}">
+                        <div class="product-header">
+                            <div class="product-icon">${p.icon}</div>
+                            <div class="product-title">${p.title}</div>
+                            <div class="product-subtitle">${p.subtitle}</div>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-description">${p.description}</div>
+                            <div class="product-price">
+                                <div class="price-amount">$${p.price.toLocaleString()}</div>
+                                <div class="price-label">Total Price</div>
+                            </div>
+                            <button class="select-btn" onclick="toggleProduct('${p.id}')">
+                                ${selected ? '✓ Selected' : 'Select Product'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateSummary();
+        }
+
+        // Update product
+        function updateProduct(index, field, value) {
+            products[index][field] = value;
+        }
+
+        // Delete product
+        function deleteProduct(index) {
+            if (confirm('Delete this product?')) {
+                products.splice(index, 1);
+                renderAdmin();
+                showToast('🗑️ Product deleted');
+            }
+        }
+
+        // Add product
+        function addProduct() {
+            products.push({
+                id: 'product_' + Date.now(),
+                icon: '🆕',
+                title: 'New Product',
+                subtitle: 'Category',
+                description: 'Enter description...',
+                price: 0
+            });
+            renderAdmin();
+            showToast('✅ Product added');
+        }
+
+        // Toggle product
+        function toggleProduct(id) {
+            if (selectedProducts.has(id)) {
+                selectedProducts.delete(id);
+            } else {
+                selectedProducts.add(id);
+            }
+            renderCustomer();
+            updateCustomerUrl();
+        }
+
+        // Update summary
+        function updateSummary() {
+            const content = document.getElementById('summaryContent');
+            
+            if (selectedProducts.size === 0) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🛡️</div>
+                        <div>Select products to see your summary</div>
+                    </div>
+                `;
+                return;
+            }
+
+            let total = 0;
+            let items = '';
+            
+            selectedProducts.forEach(id => {
+                const p = products.find(prod => prod.id === id);
+                if (!p) return;
+                total += p.price;
+                items += `
+                    <div class="summary-item">
+                        <span class="summary-item-name">${p.icon} ${p.title}</span>
+                        <span class="summary-item-price">$${p.price.toLocaleString()}</span>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = `
+                <div class="summary-body">
+                    ${items}
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Items:</span>
+                            <span>${selectedProducts.size}</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total:</span>
+                            <span class="amount">$${total.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary-actions">
+                    <button class="btn btn-primary" style="width: 100%;" onclick="copyLink('customer')">
+                        📋 Copy Link
+                    </button>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="window.print()">
+                        🖨️ Print
+                    </button>
+                </div>
+            `;
+        }
+
+        // Generate link
+        function generateLink() {
+            const data = btoa(JSON.stringify(products));
+            const url = `${window.location.origin}${window.location.pathname}?products=${data}`;
+            document.getElementById('adminShareUrl').value = url;
+            document.getElementById('adminShareBox').style.display = 'block';
+            showToast('🔗 Link generated!');
+        }
+
+        // Update customer URL
+        function updateCustomerUrl() {
+            const productsData = btoa(JSON.stringify(products));
+            const selectionsData = btoa(JSON.stringify(Array.from(selectedProducts)));
+            const url = `${window.location.origin}${window.location.pathname}?products=${productsData}&selections=${selectionsData}`;
+            document.getElementById('customerShareUrl').value = url;
+        }
+
+        // Copy link - FIXED VERSION
+        async function copyLink(type) {
+            const inputId = type === 'admin' ? 'adminShareUrl' : 'customerShareUrl';
+            const input = document.getElementById(inputId);
+            const text = input.value;
+
+            if (!text || text.trim() === '') {
+                showModal('⚠️', 'No Link Available', type === 'admin' ? 'Click "Generate Customer Link" first' : 'Select at least one product first');
+                return;
+            }
+
+            try {
+                // Try modern clipboard API first
+                await navigator.clipboard.writeText(text);
+                showToast('✅ Link copied to clipboard!');
+            } catch (err) {
+                // Fallback to older method
+                input.select();
+                input.setSelectionRange(0, 99999);
+                const success = document.execCommand('copy');
+                
+                if (success) {
+                    showToast('✅ Link copied to clipboard!');
+                } else {
+                    showModal('⚠️', 'Copy Failed', 'Please manually copy the link');
+                }
+                
+                window.getSelection().removeAllRanges();
+            }
+        }
+
+        // Email link
+        function emailLink() {
+            const url = document.getElementById('customerShareUrl').value;
+            const subject = encodeURIComponent('My F&I Product Selections');
+            const body = encodeURIComponent(`Here are my F&I product selections:\n\n${url}\n\nPlease review and contact me to finalize.`);
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        // Show modal
+        function showModal(icon, title, text) {
+            document.getElementById('modalIcon').textContent = icon;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
